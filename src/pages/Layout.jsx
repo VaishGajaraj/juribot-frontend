@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -10,6 +11,7 @@ import {
   Sparkles,
   LogOut
 } from "lucide-react";
+import { User } from "@/api/entities";
 import {
   Sidebar,
   SidebarContent,
@@ -44,8 +46,8 @@ export default function Layout({ children, currentPageName }) {
     return children;
   }
   
-  const handleLogout = () => {
-    // Implement logout functionality here
+  const handleLogout = async () => {
+    await User.logout();
     navigate(createPageUrl("Landing"));
   };
 

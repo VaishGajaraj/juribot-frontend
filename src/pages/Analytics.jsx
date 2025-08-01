@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Document, Citation } from "@/api/entities";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, TrendingUp, PieChart, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function AnalyticsPage() {
+  const [documents, setDocuments] = useState([]);
+  const [citations, setCitations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadAnalyticsData();
+  }, []);
+
+  const loadAnalyticsData = async () => {
+    setIsLoading(true);
+    try {
+      const [docsData, citationsData] = await Promise.all([
+        Document.list("-created_date"),
+        Citation.list("-created_date")
+      ]);
+      setDocuments(docsData);
+      setCitations(citationsData);
+    } catch (error) {
+      console.error("Error loading analytics data:", error);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto space-y-8">

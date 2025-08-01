@@ -1,9 +1,15 @@
-import { apiClient } from './base44Client';
+import { base44 } from './base44Client';
 
-export const analyzeText = (text) => {
-  return apiClient.post('/analyze', { text });
-};
 
-export const getRules = () => {
-  return apiClient.get('/rules');
-};
+export const Document = base44.entities.Document;
+
+export const Citation = base44.entities.Citation;
+
+export const Rule = base44.entities.Rule;
+
+export const Feedback = base44.entities.Feedback;
+
+
+
+// auth sdk:
+export const User = base44.auth;

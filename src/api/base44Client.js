@@ -1,5 +1,8 @@
-import axios from 'axios';
+import { createClient } from '@base44/sdk';
+// import { getAccessToken } from '@base44/sdk/utils/auth-utils';
 
-export const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:5000',
+// Create a client with authentication required
+export const base44 = createClient({
+  appId: "686536bdb794ffe3b7b49593", 
+  requiresAuth: true // Ensure authentication is required for all operations
 });
